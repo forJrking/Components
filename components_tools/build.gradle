@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+
+//ext {
+//    POM_NAME = "TEST"
+//    POM_GROUP_ID = 'cn.test'    //jcenter的GroupId：一般是包名
+//    POM_ARTIFACT_ID = 'http'     //jcenter的ArtifactId：一般是项目名
+//    POM_VERSION = '1.0.0'    //发布的版本号：每次上传必须不一样
+//    POM_PACKAGING = 'aar'
+//    POM_DESCRIPTION = 'A network framework for Android'     //项目描述
+//    POM_GIT_TAG = false
+//    //以上所有信息自行修改，以下不变
+//    licenseName = 'The Apache Software License, Version 2.0'
+//    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//    allLicenses = ["Apache-2.0"]
+//}
+
+//apply from: './upload_maven.gradle'
+apply from: "https://raw.githubusercontent.com/forJrking/maven/master/upload_maven.gradle"
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "30.0.0"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    compileOnly 'com.google.code.gson:gson:2.8.6'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+}

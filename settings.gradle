@@ -1,0 +1,3 @@
+include ':app'
+include ':components_tools'
+rootProject.name = "Components_tools"

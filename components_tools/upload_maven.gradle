@@ -1,0 +1,55 @@
+apply plugin: 'maven'
+
+// 使用方法
+// 1. 配置 gradle.properties
+// 2. apply from: './upload_maven.gradle'
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    failOnError false//忽略编码错误
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    from androidJavadocs.destinationDir
+    classifier = 'javadoc'
+}
+
+task androidSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+// 上传具体任务  文档一般不需要
+artifacts {
+    archives androidSourcesJar
+//    archives androidJavadocsJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: releaseRepositoryUrl) {
+                authentication(userName: username, password: password)
+            }
+            snapshotRepository(url: snapshotsRepositoryUrl) {
+                authentication(userName: username, password: password)
+            }
+            pom.project {
+                name        POM_NAME
+                version     POM_VERSION
+                groupId     POM_GROUP_ID
+                artifactId  POM_ARTIFACT_ID
+                packaging   POM_PACKAGING
+                description POM_DESCRIPTION
+            }
+        }
+    }
+}.doLast {
+    if (!POM_VERSION.endsWith("-SNAPSHOT") && POM_GIT_TAG.toBoolean()) {
+        createTag.execute()
+    }
+}.doLast {
+    if (!POM_VERSION.endsWith("-SNAPSHOT") && POM_GIT_TAG.toBoolean()) {
+        pushTag.execute()
+    }
+}
