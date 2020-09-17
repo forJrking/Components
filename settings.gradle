@@ -1,3 +1,4 @@
+include ':components_ui'
 include ':app'
 include ':components_tools'
-rootProject.name = "Components_tools"
+rootProject.name = "Components"

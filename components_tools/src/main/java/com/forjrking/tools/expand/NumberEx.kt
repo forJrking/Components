@@ -1,10 +1,8 @@
 package com.forjrking.tools.expand
 
-import com.forjrking.tools.Cxt
-import com.forjrking.tools.EmptyUtils
+import android.content.res.Resources
 import java.math.BigDecimal
 import java.math.RoundingMode
-import kotlin.math.roundToInt
 import kotlin.math.roundToLong
 
 /**
@@ -33,87 +31,65 @@ fun Double.formatNoZero(): String =
         this.toString()
     }
 
-
-/**
- * dp转px
- */
+/** dp转px*/
 val Float.dp
     get() = dp2px
 
-/**
- * sp转px
- */
+/** sp转px*/
 val Float.sp
     get() = sp2px
 
-/**
- * dp转px
- */
+/** dp转px*/
 val Int.dp
     get() = toFloat().dp
 
-/**
- * sp转px
- */
+/** sp转px*/
 val Int.sp
     get() = toFloat().sp
 
-/**
- * dp转px
- */
-val Float.dp2px
-    get() = run {
-        val scale = Cxt.res.displayMetrics.density
-        this * scale + 0.5F
-    }.toInt()
 
-/**
- * dp转px
- */
-val Int.dp2px
-    get() = toFloat().dp2px
-
-/**
- * sp转px
- */
-val Float.sp2px
-    get() = run {
-        val fontScale = Cxt.res.displayMetrics.scaledDensity
-        this * fontScale + 0.5F
-    }.toInt()
-
-/**
- * sp转px
- */
-val Int.sp2px
-    get() = toFloat().sp2px
-
-/**
- * px转dp
- */
+/** px转dp*/
 val Float.px2dp
     get() = run {
-        val scale = Cxt.res.displayMetrics.scaledDensity
-        this / scale + 0.5F
+        val scale = metrics().density
+        this / scale + .5F
     }.toInt()
 
-/**
- * px转dp
- */
+/** dp转px*/
+val Float.dp2px
+    get() = run {
+        val scale = metrics().density
+        this * scale + .5F
+    }.toInt()
+
+/** px转dp*/
 val Int.px2dp
     get() = toFloat().px2dp
 
-/**
- * px转sp
- */
-val Float.px2sp
+/** dp转px*/
+val Int.dp2px
+    get() = toFloat().dp2px
+
+/** sp转px*/
+val Float.sp2px
     get() = run {
-        val fontScale = Cxt.res.displayMetrics.scaledDensity
-        this / fontScale + 0.5f
+        val fontScale = metrics().scaledDensity
+        this * fontScale + .5F
     }.toInt()
 
-/**
- * px转sp
- */
+/** px转sp*/
+val Float.px2sp
+    get() = run {
+        val fontScale = metrics().scaledDensity
+        this / fontScale + .5f
+    }.toInt()
+
+/** px转sp*/
 val Int.px2sp
     get() = toFloat().px2sp
+
+/** sp转px*/
+val Int.sp2px
+    get() = toFloat().sp2px
+
+private inline fun metrics() = Resources.getSystem().displayMetrics

@@ -1,16 +1,9 @@
 package com.components.tools
 
-import android.app.Activity
-import android.app.Application
-import android.content.Context
-import android.content.res.Resources
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import com.forjrking.tools.Cxt
-import com.forjrking.tools.EmptyUtils
+import androidx.appcompat.app.AppCompatActivity
 import com.forjrking.tools.activity.ActivityManager
-import com.forjrking.tools.log.KLog
-import com.forjrking.tools.startup.DelayInitDispatcher
 import com.forjrking.tools.thread.GoHandler
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +15,9 @@ class MainActivity : AppCompatActivity() {
         GoHandler.getInstance().runOnMainThread {
             //do something
         }
+    }
 
-        KLog.getConfig().setLogSwitch(Cxt.debugEnable)
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

@@ -6,12 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <com.forjrking.ui.round.CircleImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="#876767"
+        app:civ_border_color="@color/colorAccent"
+        app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.forjrking.ui.round.RoundImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:corners="100dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
