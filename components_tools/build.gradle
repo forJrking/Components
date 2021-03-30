@@ -17,7 +17,7 @@ apply plugin: 'kotlin-android'
 //}
 
 //apply from: './upload_maven.gradle'
-apply from: "https://raw.githubusercontent.com/forJrking/maven/master/upload_maven.gradle"
+//apply from: "https://raw.githubusercontent.com/forJrking/maven/master/upload_maven.gradle"
 
 android {
     compileSdkVersion 29
