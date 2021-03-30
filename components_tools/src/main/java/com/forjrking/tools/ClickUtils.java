@@ -35,8 +35,8 @@ public class ClickUtils {
      * @param v 点击的控件
      * @return true:是，false:不是
      */
-    public static boolean isFastDoubleClick(View v) {
-        return isFastDoubleClick(v, DEFAULT_INTERVAL_MILLIS);
+    public static boolean isFastClickExecute(View v) {
+        return isFastClickExecute(v, DEFAULT_INTERVAL_MILLIS);
     }
 
     /**
@@ -46,7 +46,7 @@ public class ClickUtils {
      * @param intervalMillis 时间间期（毫秒）
      * @return true:是，false:不是
      */
-    public static boolean isFastDoubleClick(View v, long intervalMillis) {
+    public static boolean isFastClickExecute(View v, long intervalMillis) {
         int id = v.getId() == NO_ID ? v.hashCode() : v.getId();
         return isFastExecute(id, intervalMillis);
     }
@@ -96,7 +96,7 @@ public class ClickUtils {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listener != null && isFastDoubleClick(view)) {
+                if (listener != null && isFastClickExecute(view)) {
                     listener.onClick(v);
                 }
             }
