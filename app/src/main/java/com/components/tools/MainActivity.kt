@@ -1,23 +1,42 @@
 package com.components.tools
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.forjrking.tools.activity.ActivityManager
-import com.forjrking.tools.thread.GoHandler
+import androidx.compose.Composable
+import androidx.ui.core.Alignment
+import androidx.ui.core.setContent
+import androidx.ui.foundation.Text
+import androidx.ui.graphics.Color
+import androidx.ui.layout.Arrangement
+import androidx.ui.layout.Column
+import androidx.ui.text.font.FontFamily
+import androidx.ui.tooling.preview.Preview
+import androidx.ui.unit.sp
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        ActivityManager.instances.initialize(this.application)
-
-        GoHandler.getInstance().runOnMainThread {
-            //do something
+        setContent {
+            mainUi()
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+}
+
+@Preview
+@Composable
+fun mainUi(){
+    Column(
+        verticalArrangement = Arrangement.Bottom,
+        horizontalGravity = Alignment.CenterHorizontally
+    ) {
+        Text(text = "AAA1")
+        Text(
+            text = "AAA2",
+            color = Color.Red,
+            fontSize = 16.sp,
+            fontFamily = FontFamily.SansSerif
+        )
+        Text(text = "AAA3", color = Color.Blue)
     }
 }
