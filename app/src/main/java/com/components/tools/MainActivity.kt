@@ -1,42 +1,51 @@
 package com.components.tools
 
+import android.content.Context
 import android.os.Bundle
+import android.os.Message
+import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.ui.core.Alignment
-import androidx.ui.core.setContent
-import androidx.ui.foundation.Text
-import androidx.ui.graphics.Color
-import androidx.ui.layout.Arrangement
-import androidx.ui.layout.Column
-import androidx.ui.text.font.FontFamily
-import androidx.ui.tooling.preview.Preview
-import androidx.ui.unit.sp
+import com.github.forjrking.athook.ActivityThreadCallback
+import com.github.forjrking.athook.ActivityThreadHooker
+import com.github.forjrking.athook.SpBlockHook
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            mainUi()
+        setContentView(R.layout.activity_main)
+
+        ActivityThreadHooker.hook(object : ActivityThreadCallback() {
+            override fun handleMessageAfter(msg: Message) {
+            }
+
+            override fun handleMessageBefore(msg: Message) {
+                SpBlockHook.handlerMessage(msg)
+            }
+
+            override fun handleMessageException(msg: Message, e: Throwable?): Boolean {
+                return super.handleMessageException(msg, e)
+            }
+
+        })
+        val sharedPreferences = this.getSharedPreferences("test_sp", Context.MODE_PRIVATE)
+        val edit = sharedPreferences.edit()
+        val btn: Button = findViewById(R.id.btn)
+        btn.setOnClickListener {
+            for (i in 0..2000) {
+                edit.apply {
+                    putInt("key_$i", i)
+//                    putString("user_key_$i", "some user id $i")
+                    apply()
+                }
+            }
+            Log.d("Main", "apply: 完成")
         }
     }
 
-}
-
-@Preview
-@Composable
-fun mainUi(){
-    Column(
-        verticalArrangement = Arrangement.Bottom,
-        horizontalGravity = Alignment.CenterHorizontally
-    ) {
-        Text(text = "AAA1")
-        Text(
-            text = "AAA2",
-            color = Color.Red,
-            fontSize = 16.sp,
-            fontFamily = FontFamily.SansSerif
-        )
-        Text(text = "AAA3", color = Color.Blue)
+    override fun onStop() {
+        super.onStop()
+        Log.d("Main", "onStop: 完成")
     }
+
 }

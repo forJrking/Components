@@ -1,0 +1,3 @@
+-keep class com.github.forjrking.athook.SpBlockHook { *; }
+-keep class com.github.forjrking.athook.ActivityThreadCallback { *; }
+-keep class com.github.forjrking.athook.ActivityThreadHooker { *; }
