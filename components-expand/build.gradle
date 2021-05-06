@@ -2,7 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.forJrking'
+group = 'com.github.forJrking'
+version = '0.0.1'
 
 android {
     compileSdkVersion 30

@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+
+group = 'com.github.forJrking'
+version = '0.0.1'
 
 android {
     compileSdkVersion 30
