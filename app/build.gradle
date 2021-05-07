@@ -39,20 +39,20 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
 
 //    implementation 'androidx.ui:ui-layout:0.1.0-dev14'
 //    implementation 'androidx.ui:ui-material:0.1.0-dev14'
 //    implementation 'androidx.ui:ui-tooling:0.1.0-dev14'
 
     //工具类扩展函数
-    implementation 'com.github.forJrking.Components:ui-recycleview:0.0.5'
-    implementation 'com.github.forJrking.Components:activityThreadHook:0.0.5'
-    implementation 'com.github.forJrking.Components:components-thread:0.0.5'
-//    implementation 'com.github.forJrking.Components:components-expand:0.0.5'
-    implementation project(path: ':components-expand')
-
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:+'
+    implementation 'com.github.forJrking.Components:ui-recycleview:0.0.7'
+    implementation 'com.github.forJrking.Components:activityThreadHook:0.0.7'
+    implementation 'com.github.forJrking.Components:components-thread:0.0.7'
+    implementation 'com.github.forJrking.Components:components-expand:0.0.7'
+    implementation 'com.github.forJrking.Components:components-tools:0.0.7'
+//    implementation project(path: ':components-expand')
 //    implementation project(path: ':activityThreadHook')
 //    implementation project(path: ':components_ui')
 //    implementation project(path: ':components_tools')

@@ -9,7 +9,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.github.forJrking.expand.*
 import com.github.forjrking.athook.ActivityThreadCallback
 import com.github.forjrking.athook.ActivityThreadHooker
