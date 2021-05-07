@@ -14,8 +14,6 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -25,6 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -32,9 +31,4 @@ dependencies {
     compileOnly 'androidx.appcompat:appcompat:1.2.0'
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compileOnly 'androidx.recyclerview:recyclerview:1.1.0'
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
 }
