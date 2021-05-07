@@ -26,9 +26,9 @@ android {
         }
     }
 
-    packagingOptions {
-        exclude("META-INF/*")
-    }
+//    packagingOptions {
+//        exclude("META-INF/*")
+//    }
 }
 
 dependencies {
