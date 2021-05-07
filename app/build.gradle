@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "30.0.1"
 
     defaultConfig {
         applicationId "com.components.tools"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -44,12 +44,19 @@ dependencies {
 //    implementation 'androidx.ui:ui-material:0.1.0-dev14'
 //    implementation 'androidx.ui:ui-tooling:0.1.0-dev14'
 
+//    Found artifact: com.github.forJrking:activityThreadHook:0.0.1
+//    Found artifact: com.github.forJrking:components-expand:0.0.1
+//    Found artifact: com.github.forJrking:components-tools:-96ca995f95-1
+
     //工具类扩展函数
-//    implementation 'com.nx.android.components:tools:0.0.2'
+//    implementation 'com.github.forJrking:activityThreadHook:+'
+//    implementation 'com.github.forJrking:components-expand:+'
+
+
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.material:material:1.2.0'
-    implementation project(path: ':activityThreadHook')
+//    implementation project(path: ':activityThreadHook')
 //    implementation project(path: ':components_ui')
 //    implementation project(path: ':components_tools')
     testImplementation 'junit:junit:4.12'

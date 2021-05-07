@@ -1,14 +1,18 @@
 package com.github.forJrking.expand
 
 import android.app.Activity
+import android.content.Context
 import android.content.ContextWrapper
+import android.graphics.Bitmap
 import android.graphics.Rect
 import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.TouchDelegate
 import android.view.View
 import android.view.View.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
@@ -24,55 +28,47 @@ import androidx.lifecycle.OnLifecycleEvent
 
 /**
  * 隐藏 View
+ * @param gone true
  */
-fun View.hide(isTrue: Boolean = true) {
-    visibility = if (isTrue) GONE else VISIBLE
+fun View.hide(gone: Boolean = true) {
+    visibility = if (gone) GONE else VISIBLE
 }
 
 
 /**
  * 显示/隐藏 View
- * @param isTrue {@code true } 显示<br>{@code false} 隐藏
+ * @param visible {@code true } 显示<br>{@code false} 隐藏
  */
-fun View.show(isTrue: Boolean = true) {
-    visibility = if (isTrue) VISIBLE else GONE
+fun View.show(visible: Boolean = true) {
+    visibility = if (visible) VISIBLE else GONE
 }
 
 /**
  * invisible/显示 View
  * @param `true` INVISIBLE, `false` VISIBLE
  */
-fun View.invisible(isTrue: Boolean = true) {
-    visibility = if (isTrue) INVISIBLE else VISIBLE
+fun View.invisible(invisible: Boolean = true) {
+    visibility = if (invisible) INVISIBLE else VISIBLE
 }
 
+val View.isVisible: Boolean
+    get() = visibility == VISIBLE
+val View.isInvisible: Boolean
+    get() = visibility == INVISIBLE
+val View.isGone: Boolean
+    get() = visibility == GONE
 
-/**
- * 判断View是不是可见
- *
- * @return `true` 可见([View.getVisibility] == [View.VISIBLE])
- */
-fun View.isVisible(): Boolean {
-    return visibility == VISIBLE
+fun View.hideKeyboard(): Boolean {
+    clearFocus()
+    return inputMethodManager().hideSoftInputFromWindow(windowToken, 0)
 }
 
+inline fun View.inputMethodManager() =
+    (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
 
-/**
- * 判断View是不是可见
- *
- * @return `true` 可见([View.getVisibility] == [View.INVISIBLE])
- */
-fun View.isInvisible(): Boolean {
-    return visibility == INVISIBLE
-}
-
-/**
- * 判断View是不是可见
- *
- * @return `true` 可见([View.getVisibility] == [View.GONE])
- */
-fun View.isGone(): Boolean {
-    return visibility == GONE
+fun View.showKeyboard(): Boolean {
+    requestFocus()
+    return inputMethodManager().showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 }
 
 /**
@@ -157,9 +153,38 @@ fun View.expandTouchArea(size: Int = 30) {
 }
 
 /**
- * @since 3.0.0
- */
+ * @des:  view -> bitmap
+ * @author: forjrking
+ * @time: 2021/5/7 9:56 AM
+ * @return bitmap位图
+ **/
+fun View.toBitmap(): Bitmap? {
+    clearFocus()
+    isPressed = false
+    val willNotCache = willNotCacheDrawing()
+    setWillNotCacheDrawing(false)
+    // Reset the drawing cache background color to fully transparent
+    // for the duration of this operation
+    val color = drawingCacheBackgroundColor
+    drawingCacheBackgroundColor = 0
+    if (color != 0) destroyDrawingCache()
+    buildDrawingCache()
+    val cacheBitmap = drawingCache
+    if (cacheBitmap == null) {
+        Log.e("Views", "failed to get bitmap from $this", RuntimeException())
+        return null
+    }
+    val bitmap = Bitmap.createBitmap(cacheBitmap)
+    // Restore the view
+    destroyDrawingCache()
+    setWillNotCacheDrawing(willNotCache)
+    drawingCacheBackgroundColor = color
+    return bitmap
+}
 
+/**
+ * 外部可操作类
+ */
 object Views {
 
     private val clickMap by lazy { hashMapOf<Int, Triple<Int, Int, Long>>() }

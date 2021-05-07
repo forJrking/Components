@@ -12,14 +12,10 @@ import androidx.fragment.app.Fragment
 
 /**
  * Context 加载布局方法，包括 [RecyclerView] item 的加载方法 [inflateRv(Int, ViewGroup)]
- * <p>
- * @author ['s GitHub](https://github.com/Ayvytr)
  * @since 1.0.0
  */
 
-/**
- * 使用Context初始化布局
- */
+/*** 使用Context初始化布局*/
 fun Context.inflate(
     @LayoutRes id: Int, parent: ViewGroup? = null,
     attachToParent: Boolean = parent != null
@@ -27,16 +23,12 @@ fun Context.inflate(
     return LayoutInflater.from(this).inflate(id, parent, attachToParent)
 }
 
-/**
- * 使用Context初始化布局，专为RecyclerView提供
- */
+/*** 使用Context初始化布局，专为RecyclerView提供*/
 fun Context.inflateRv(@LayoutRes id: Int, parent: ViewGroup?): View {
     return LayoutInflater.from(this).inflate(id, parent, false)
 }
 
-/**
- * 使用Fragment初始化布局
- */
+/*** 使用Fragment初始化布局*/
 fun Fragment.inflate(
     @LayoutRes id: Int, parent: ViewGroup? = null,
     attachToParent: Boolean = parent != null
@@ -44,19 +36,12 @@ fun Fragment.inflate(
     return LayoutInflater.from(context).inflate(id, parent, attachToParent)
 }
 
-/**
- * 使用Fragment初始化布局，专为RecyclerView提供
- */
+/*** 使用Fragment初始化布局，专为RecyclerView提供*/
 fun Fragment.inflateRv(@LayoutRes id: Int, parent: ViewGroup?): View {
     return LayoutInflater.from(context).inflate(id, parent, false)
 }
 
-
-/**
- * 获取状态栏高度
- *
- * @return 状态栏高度px
- */
+/*** 获取状态栏高度*/
 val Context.statusBarHeight: Int
     get() {
         var result = 0
@@ -68,11 +53,7 @@ val Context.statusBarHeight: Int
         return result
     }
 
-/**
- * 获取状态栏高度
- *
- * @return 虚拟底部栏高度px
- */
+/*** 获取底部栏高度*/
 val Context.navigationBarHeight: Int
     get() {
         var result = 0
@@ -82,6 +63,14 @@ val Context.navigationBarHeight: Int
         }
         return result
     }
+
+/*** screen width in pixels*/
+inline val Context.screenWidth
+    get() = resources.displayMetrics.widthPixels
+
+/*** screen height in pixels*/
+inline val Context.screenHeight
+    get() = resources.displayMetrics.heightPixels
 
 /**
  * 判断是不是黑夜模式
