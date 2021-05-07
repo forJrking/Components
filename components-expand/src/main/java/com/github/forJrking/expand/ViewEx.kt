@@ -16,9 +16,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.collection.LruCache
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 
 /**
@@ -238,7 +238,7 @@ object Views {
                 }
                 if (textChangeMap.isNotEmpty()) {
                     val et = textChangeMap.keys.first()
-                    (et.context as? FragmentActivity)?.lifecycle?.removeObserver(this)
+                    (et.context as? LifecycleOwner)?.lifecycle?.removeObserver(this)
                     textChangeMap.clear()
                 }
             }
@@ -252,7 +252,7 @@ object Views {
         action: (text: String) -> Unit
     ) {
         if (!textChangeMap.containsKey(et)) {
-            (et.context as? FragmentActivity)?.lifecycle?.addObserver(textChangeObserver)
+            (et.context as? LifecycleOwner)?.lifecycle?.addObserver(textChangeObserver)
             val textWatcher = object : TextWatcher {
                 override fun afterTextChanged(s: Editable) {
                     val runnable =
@@ -276,13 +276,7 @@ object Views {
                     }
                 }
 
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             }

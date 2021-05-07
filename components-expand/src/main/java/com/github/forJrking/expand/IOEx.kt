@@ -10,6 +10,12 @@ inline fun Closeable?.closeQuietly() {
     }
 }
 
+inline fun Array<out Closeable?>?.closeQuietly() {
+    this?.forEach {
+        it?.closeQuietly()
+    }
+}
+
 inline fun <T : Closeable?, R> T.autoClose(block: (T) -> R): R {
     var closed = false
     try {

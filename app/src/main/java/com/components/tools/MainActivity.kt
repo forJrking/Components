@@ -2,6 +2,7 @@ package com.components.tools
 
 import android.app.ActivityManager
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.Message
 import android.util.Log
@@ -19,7 +20,9 @@ import java.io.FileInputStream
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        val root = this.inflate(R.layout.activity_main)
+        setContentView(root)
 
         ActivityThreadHooker.hook(object : ActivityThreadCallback() {
             override fun handleMessageAfter(msg: Message) {
@@ -62,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         val screenHeight: Int = this.screenHeight
         val screenWidth: Int = this.screenWidth
         val activityManager: ActivityManager = this.activityManager
-        val root = this.inflate(R.layout.activity_main)
+
 
         /*** 使用Context初始化布局，专为RecyclerView提供*/
 //        val view = this.inflateRv(R.layout.activity_main, parent)
@@ -70,6 +73,12 @@ class MainActivity : AppCompatActivity() {
         file.createNewFile()
         val fileInputStream = FileInputStream(file)
         fileInputStream.closeQuietly()
+
+        val in1 = FileInputStream(file)
+        val in2 = FileInputStream(file)
+        val in3 = FileInputStream(file)
+
+        arrayOf(in1, in2, in3).closeQuietly()
         //精确到小数点后几位
         val doExact = 21.6.doExact()
         Log.d(TAG(), "doExact: $doExact")
@@ -86,26 +95,26 @@ class MainActivity : AppCompatActivity() {
 
         20.dp
         20.dp2px
-        20.px2dp
+        val px2dp: Int = 20.px2dp
         20f.sp
-        val sp2px: Int = 20f.sp2px
+        val sp2px: Float = 20f.sp2px
         val px2sp = 20f.px2sp
 
         // 设置显示状态
-        root.show()
-        root.hide()
-        root.invisible()
+//        root.show()
+//        root.hide()
+//        root.invisible()
         // 获取显示状态
         val visible = root.isVisible
         val gone = root.isGone
         val invisible = root.isInvisible
-        // 快照
-        val toBitmap = root.toBitmap()
+
         // 扩大点击范围
         btn.expandTouchArea(size = 40)
         // 防止重复点击
         btn.onFilterClick {
-
+            // 快照
+            val toBitmap = root.toBitmap()
         }
         //获取内部activity
         val activity = btn.getActivity()
@@ -114,6 +123,14 @@ class MainActivity : AppCompatActivity() {
 
         }
         editView.hideKeyboard()
+
+        val dm1 = Resources.getSystem().displayMetrics
+
+        Log.d(TAG(), "dm1: $dm1")
+
+        val dm2 = this.resources.displayMetrics
+
+        Log.d(TAG(), "dm2: $dm2")
     }
 
     override fun onStop() {
