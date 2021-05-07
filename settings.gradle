@@ -1,6 +1,8 @@
+include ':app'
 include ':components-thread'
 include ':components-expand'
-include ':activityThreadHook'
-include ':app'
 include ':components-tools'
+include ':ui-recycleview'
+
+include ':activityThreadHook'
 rootProject.name = "Components"

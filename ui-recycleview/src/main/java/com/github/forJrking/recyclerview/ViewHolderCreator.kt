@@ -1,4 +1,4 @@
-package com.github.forJrking.expand.recyclerview
+package com.github.forJrking.recyclerview
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable

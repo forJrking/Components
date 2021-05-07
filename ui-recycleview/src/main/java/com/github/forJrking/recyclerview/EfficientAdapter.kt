@@ -1,4 +1,4 @@
-package com.github.forJrking.expand.recyclerview
+package com.github.forJrking.recyclerview
 
 import android.view.ViewGroup
 import androidx.collection.SparseArrayCompat

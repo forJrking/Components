@@ -1,4 +1,4 @@
-package com.github.forJrking.expand.recyclerview
+package com.github.forJrking.recyclerview
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
