@@ -14,7 +14,7 @@ import java.util.concurrent.CopyOnWriteArrayList
  * @date: 2020/7/6 10:24
  * @version: 1.0.0
  */
-class ActivityManager() {
+class ActivityManager private constructor() {
 
     private val CHECK_DELAY = 600L
 
@@ -170,8 +170,8 @@ class ActivityManager() {
             paused = false
             val wasBackground: Boolean = !foreground
             foreground = true
-            if (check != null) {
-                handler.removeCallbacks(check)
+            check?.let {
+                handler.removeCallbacks(it)
             }
             if (wasBackground) {
                 listeners.forEach {
@@ -182,8 +182,8 @@ class ActivityManager() {
 
         override fun onActivityPaused(activity: Activity) {
             paused = true
-            if (check != null) {
-                handler.removeCallbacks(check)
+            check?.let {
+                handler.removeCallbacks(it)
             }
             handler.postDelayed(Runnable {
                 if (foreground && paused) {

@@ -1,4 +1,4 @@
-package com.forjrking.ui.dialog
+package com.github.forjrking.ui.dialog
 
 import android.app.Dialog
 import android.content.Context
