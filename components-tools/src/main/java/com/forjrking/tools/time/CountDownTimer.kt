@@ -213,7 +213,7 @@ open class CountDownTimer {
     }
 
     private object TimerLogger {
-        fun i(args: String?) {
+        fun i(args: String) {
             Log.i("Countdown", args)
         }
     }
