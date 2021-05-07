@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
  */
 
 /*** 使用Context初始化布局*/
-fun Context.inflate(
+inline fun Context.inflate(
     @LayoutRes id: Int, parent: ViewGroup? = null,
     attachToParent: Boolean = parent != null
 ): View {
@@ -24,12 +24,12 @@ fun Context.inflate(
 }
 
 /*** 使用Context初始化布局，专为RecyclerView提供*/
-fun Context.inflateRv(@LayoutRes id: Int, parent: ViewGroup?): View {
+inline fun Context.inflateRv(@LayoutRes id: Int, parent: ViewGroup?): View {
     return LayoutInflater.from(this).inflate(id, parent, false)
 }
 
 /*** 使用Fragment初始化布局*/
-fun Fragment.inflate(
+inline fun Fragment.inflate(
     @LayoutRes id: Int, parent: ViewGroup? = null,
     attachToParent: Boolean = parent != null
 ): View {
@@ -37,7 +37,7 @@ fun Fragment.inflate(
 }
 
 /*** 使用Fragment初始化布局，专为RecyclerView提供*/
-fun Fragment.inflateRv(@LayoutRes id: Int, parent: ViewGroup?): View {
+inline fun Fragment.inflateRv(@LayoutRes id: Int, parent: ViewGroup?): View {
     return LayoutInflater.from(context).inflate(id, parent, false)
 }
 

@@ -45,10 +45,10 @@ dependencies {
 //    implementation 'androidx.ui:ui-tooling:0.1.0-dev14'
 
     //工具类扩展函数
-    implementation 'com.github.forJrking.Components:ui-recycleview:0.0.3'
-    implementation 'com.github.forJrking.Components:activityThreadHook:0.0.3'
-    implementation 'com.github.forJrking.Components:components-thread:0.0.3'
-    implementation 'com.github.forJrking.Components:components-expand:0.0.3'
+    implementation 'com.github.forJrking.Components:ui-recycleview:0.0.5'
+    implementation 'com.github.forJrking.Components:activityThreadHook:0.0.5'
+    implementation 'com.github.forJrking.Components:components-thread:0.0.5'
+    implementation 'com.github.forJrking.Components:components-expand:0.0.5'
 
 
     implementation 'androidx.appcompat:appcompat:1.2.0'

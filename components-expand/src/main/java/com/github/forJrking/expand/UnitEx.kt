@@ -1,66 +1,67 @@
 package com.github.forJrking.expand
 
 import android.content.res.Resources
+import android.util.DisplayMetrics
+import kotlin.math.roundToInt
 
 /** dp转px*/
-val Float.dp
+inline val Float.dp
     get() = dp2px
 
 /** sp转px*/
-val Float.sp
+inline val Float.sp
     get() = sp2px
 
-/** dp转px*/
-val Int.dp
-    get() = toFloat().dp
-
-/** sp转px*/
-val Int.sp
-    get() = toFloat().sp
-
-
 /** px转dp*/
-val Float.px2dp
+inline val Float.px2dp
     get() = run {
         val scale = metrics().density
-        this / scale + .5F
-    }.toInt()
+        this / scale
+    }
 
 /** dp转px*/
-val Float.dp2px
+inline val Float.dp2px
     get() = run {
         val scale = metrics().density
-        this * scale + .5F
-    }.toInt()
+        this * scale
+    }
 
-/** px转dp*/
-val Int.px2dp
-    get() = toFloat().px2dp
+/** px转sp*/
+inline val Float.px2sp
+    get() = run {
+        val fontScale = metrics().scaledDensity
+        this / fontScale
+    }
+
+/** sp转px*/
+inline val Float.sp2px
+    get() = run {
+        val fontScale = metrics().scaledDensity
+        this * fontScale
+    }
 
 /** dp转px*/
-val Int.dp2px
-    get() = toFloat().dp2px
+inline val Int.dp
+    get() = toFloat().dp.roundToInt()
 
 /** sp转px*/
-val Float.sp2px
-    get() = run {
-        val fontScale = metrics().scaledDensity
-        this * fontScale + .5F
-    }.toInt()
+inline val Int.sp
+    get() = toFloat().sp.roundToInt()
+
+/** px转dp*/
+inline val Int.px2dp
+    get() = toFloat().px2dp.roundToInt()
+
+/** dp转px*/
+inline val Int.dp2px
+    get() = toFloat().dp2px.roundToInt()
 
 /** px转sp*/
-val Float.px2sp
-    get() = run {
-        val fontScale = metrics().scaledDensity
-        this / fontScale + .5f
-    }.toInt()
-
-/** px转sp*/
-val Int.px2sp
-    get() = toFloat().px2sp
+inline val Int.px2sp
+    get() = toFloat().px2sp.roundToInt()
 
 /** sp转px*/
-val Int.sp2px
-    get() = toFloat().sp2px
+inline val Int.sp2px
+    get() = toFloat().sp2px.roundToInt()
 
-private inline fun metrics() = Resources.getSystem().displayMetrics
+inline fun metrics(): DisplayMetrics = Resources.getSystem().displayMetrics

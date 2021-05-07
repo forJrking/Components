@@ -2,7 +2,7 @@ package com.github.forJrking.expand
 
 import java.io.Closeable
 
-fun Closeable?.closeQuietly() {
+inline fun Closeable?.closeQuietly() {
     try {
         this?.close()
     } catch (e: Throwable) {
@@ -10,7 +10,7 @@ fun Closeable?.closeQuietly() {
     }
 }
 
-inline fun <T : Closeable?, R> T.use(block: (T) -> R): R {
+inline fun <T : Closeable?, R> T.autoClose(block: (T) -> R): R {
     var closed = false
     try {
         return block(this)

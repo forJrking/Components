@@ -13,4 +13,9 @@
         android:layout_gravity="center"
         android:text="存入20000次数据" />
 
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </FrameLayout>

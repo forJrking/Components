@@ -15,16 +15,11 @@ import android.view.View.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
+import androidx.collection.LruCache
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-
-/**
- * View 相关的Kotlin扩展方法
- * <p>
- */
-
 
 /**
  * 隐藏 View
@@ -44,18 +39,16 @@ fun View.show(visible: Boolean = true) {
 }
 
 /**
- * invisible/显示 View
- * @param `true` INVISIBLE, `false` VISIBLE
- */
+ * invisible/显示 View @param `true` INVISIBLE, `false` VISIBLE*/
 fun View.invisible(invisible: Boolean = true) {
     visibility = if (invisible) INVISIBLE else VISIBLE
 }
 
-val View.isVisible: Boolean
+inline val View.isVisible: Boolean
     get() = visibility == VISIBLE
-val View.isInvisible: Boolean
+inline val View.isInvisible: Boolean
     get() = visibility == INVISIBLE
-val View.isGone: Boolean
+inline val View.isGone: Boolean
     get() = visibility == GONE
 
 fun View.hideKeyboard(): Boolean {
@@ -187,7 +180,7 @@ fun View.toBitmap(): Bitmap? {
  */
 object Views {
 
-    private val clickMap by lazy { hashMapOf<Int, Triple<Int, Int, Long>>() }
+    private val idLruCache by lazy { LruCache<Int, Triple<Int, Int, Long>>(180) }
 
     fun onClick(
         view: View,
@@ -196,9 +189,9 @@ object Views {
         action: () -> Unit
     ) {
         val viewId = view.getViewId()
-        clickMap.remove(viewId)
+        idLruCache.remove(viewId)
         view.setOnClickListener {
-            val t = clickMap[viewId]
+            val t = idLruCache[viewId]
             var times = doActionAfterTimes
             if (times < 1) {
                 times = 1
@@ -208,22 +201,22 @@ object Views {
             if (times == 1) {
                 if (t == null || (third - t.third >= millisecondInterval)) {
                     action.invoke()
-                    clickMap[viewId] = Triple(1, 1, third)
+                    idLruCache.put(viewId, Triple(1, 1, third))
                 }
             } else {
                 if (t == null) {
-                    clickMap[viewId] = Triple(times, 1, third)
+                    idLruCache.put(viewId, Triple(times, 1, third))
                 } else {
                     if (third - t.third >= millisecondInterval) {
-                        clickMap[viewId] = Triple(times, 1, third)
+                        idLruCache.put(viewId, Triple(times, 1, third))
                     } else {
                         val newT = t.copy(second = t.second + 1, third = third)
-                        clickMap[viewId] = newT
+                        idLruCache.put(viewId, newT)
                         if (newT.second != newT.first) {
                             //不做任何操作
                         } else {
                             action.invoke()
-                            clickMap.remove(viewId)
+                            idLruCache.remove(viewId)
                         }
                     }
                 }
