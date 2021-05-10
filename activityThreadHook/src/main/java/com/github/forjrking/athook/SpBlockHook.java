@@ -73,12 +73,14 @@ public class SpBlockHook {
             init = true;
         }
         if (sPendingWorkFinishers != null) {
+            int size = sPendingWorkFinishers.size();
             sPendingWorkFinishers.clear();
-            Log.d(TAG, "sPendingWorkFinishers clear Success! " + what);
+            Log.d(TAG, size + " sPendingWorkFinishers clear Success! " + what);
         }
         if (sPendingWorkFinishersV8 != null) {
+            int size = sPendingWorkFinishersV8.size();
             sPendingWorkFinishersV8.clear();
-            Log.d(TAG, "sFinishers clear Success! " + what);
+            Log.d(TAG, size + " sFinishers clear Success! " + what);
         }
     }
 

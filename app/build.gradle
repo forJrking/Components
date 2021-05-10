@@ -29,6 +29,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
     lintOptions {
         abortOnError false
@@ -39,6 +46,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
     ext.ver = '1.2.0' //please move this code to a unified place.
     implementation "androidx.appcompat:appcompat:$ver"
     implementation 'androidx.constraintlayout:constraintlayout:+'
@@ -49,16 +57,18 @@ dependencies {
     ext.core = '0.0.7'
     //工具类扩展函数
     implementation "com.github.forJrking.Components:ui-recycleview:$core"
-    implementation "com.github.forJrking.Components:activityThreadHook:$core"
+//    implementation "com.github.forJrking.Components:activityThreadHook:$core"
     implementation "com.github.forJrking.Components:components-thread:$core"
     implementation "com.github.forJrking.Components:components-expand:$core"
     implementation "com.github.forJrking.Components:components-tools:$core"
+    implementation 'com.github.forJrking:Preferences:+'
 //    implementation project(path: ':components-expand')
-//    implementation project(path: ':activityThreadHook')
+    implementation project(path: ':activityThreadHook')
 //    implementation project(path: ':components_ui')
 //    implementation project(path: ':components_tools')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    implementation 'com.iqiyi.xcrash:xcrash-android-lib:+'
 }
