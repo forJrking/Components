@@ -7,3 +7,4 @@ include ':ui-recycleview'
 
 include ':activityThreadHook'
 rootProject.name = "Components"
+include ':components-sp'

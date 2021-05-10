@@ -1,0 +1,2 @@
+-keep class com.github.forjrking.sharedpreferenceimpl**
+-keep class com.github.forjrking.sharedpreferenceimpl**{*;}

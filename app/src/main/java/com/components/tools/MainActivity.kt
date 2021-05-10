@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.forjrking.preferences.provide.sharedpreferenceimpl.SharedPreferencesHelper
 import com.github.forJrking.expand.inflate
 import com.github.forJrking.expand.onFilterClick
+import com.github.forjrking.sharedpreferenceimpl.SharedPreferencesHelper
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {

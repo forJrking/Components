@@ -47,6 +47,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'com.google.android.material:material:1.2.1'
+    implementation project(path: ':components-sp')
     ext.ver = '1.2.0' //please move this code to a unified place.
     implementation "androidx.appcompat:appcompat:$ver"
     implementation 'androidx.constraintlayout:constraintlayout:+'
@@ -61,7 +62,6 @@ dependencies {
     implementation "com.github.forJrking.Components:components-thread:$core"
     implementation "com.github.forJrking.Components:components-expand:$core"
     implementation "com.github.forJrking.Components:components-tools:$core"
-    implementation 'com.github.forJrking:Preferences:+'
 //    implementation project(path: ':components-expand')
     implementation project(path: ':activityThreadHook')
 //    implementation project(path: ':components_ui')
